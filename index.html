@@ -127,9 +127,7 @@
     };
 
     async function inipesan() {
-      var { value: nama } = await swals.fire({
-        title: "What's your beautiful name?",
-        input: "text",
+      var nama = Blank Name;
       });
       if (nama && nama.length < 11) {
         window.nama = nama;
