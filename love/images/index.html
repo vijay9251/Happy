@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Style Flip Album</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+
+    .book {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      perspective: 2000px;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-origin: left;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .page .front,
+    .page .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .page .front {
+      background: white;
+      z-index: 2;
+    }
+
+    .page .back {
+      background: white;
+      transform: rotateY(180deg);
+    }
+
+    .page.flipped {
+      transform: rotateY(-180deg);
+      z-index: 0 !important;
+    }
+
+    .book .page:nth-child(n) {
+      z-index: calc(20 - var(--i));
+    }
+
+    .controls {
+      position: absolute;
+      bottom: -60px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #999;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <div class="book" id="book">
+    <!-- 20 Pages -->
+    <!-- Each page has front and back (like a real book page) -->
+    <!-- Placeholder images used, you can replace with your own -->
+
+    <!-- Repeat 10 pages (each with front & back making 20 sides) -->
+    <!-- Add all 10 pages below -->
+
+    <!-- Page 1 -->
+    <div class="page" style="--i:1">
+      <div class="front"><img src="https://github.com/vijay9251/Happy/love/images/r1.png" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+2" /></div>
+    </div>
+
+    <div class="page" style="--i:2">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+3" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+4" /></div>
+    </div>
+
+    <div class="page" style="--i:3">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+5" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+6" /></div>
+    </div>
+
+    <div class="page" style="--i:4">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+7" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+8" /></div>
+    </div>
+
+    <div class="page" style="--i:5">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+9" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+10" /></div>
+    </div>
+
+    <div class="page" style="--i:6">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+11" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+12" /></div>
+    </div>
+
+    <div class="page" style="--i:7">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+13" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+14" /></div>
+    </div>
+
+    <div class="page" style="--i:8">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+15" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+16" /></div>
+    </div>
+
+    <div class="page" style="--i:9">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+17" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+18" /></div>
+    </div>
+
+    <div class="page" style="--i:10">
+      <div class="front"><img src="https://via.placeholder.com/600x400?text=Page+19" /></div>
+      <div class="back"><img src="https://via.placeholder.com/600x400?text=Page+20" /></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    let currentPage = 0;
+
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < pages.length) {
+        pages[currentPage].classList.add('flipped');
+        currentPage++;
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 0) {
+        currentPage--;
+        pages[currentPage].classList.remove('flipped');
+      }
+    });
+  </script>
+</body>
+</html>
